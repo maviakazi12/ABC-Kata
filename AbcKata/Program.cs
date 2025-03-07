@@ -18,15 +18,16 @@ public class WordGame {
         return random.Next(2) == 0 ? list1 : list2;
     }
     public void CheckIfWordExists(){
+        Console.WriteLine("The letter block list is: " + string.Join(", ", letterBlocks));
         foreach (var letter in word){
             int index = letterBlocks.FindIndex(block => block.Contains(letter));
             if (index<0){
-                Console.WriteLine("False");
+                Console.WriteLine("Sorry! the List does not contain the word "+ word);
                 return;
             }else{
                 letterBlocks.RemoveAt(index);
             }
         };
-        Console.WriteLine("TRUE");
+        Console.WriteLine("The List contains the word "+ word);
     }
 };

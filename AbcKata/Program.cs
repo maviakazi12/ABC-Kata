@@ -11,7 +11,7 @@ public class WordGame {
         this.word = word;
         letterBlocks = SelectRandomList();
     }
-    public static List<string> SelectRandomList(){
+    private static List<string> SelectRandomList(){
         List<string> list1 = new List<string> {"BO","XK","DQ","CP","NA","GT","RE","TG","QD","FS","JW","HU","VI","AN","OB","ER","FS","LY","PC","ZM"};
         List<string> list2 = new List<string> {"XT", "LW", "RM", "VF", "PK", "JN", "SQ", "DY", "BZ", "CH","UG", "AO", "MT", "EX", "QP", "HC", "ZF", "NK", "WL", "YV"};
         Random random = new Random();

@@ -1,46 +1,46 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
-
-string word = "TREE";
-// int count = 0;
-// HashSet<(int,char)> letterIndex = new HashSet<(int,char)>();
-// (int,char) letterAndIndex;
-
-// for (int i = 0; i<word.Length; i++){
-//     for (int j = 0; j<word.Length; j++){
-//         if (word[i]== word[j]){
-//             count++;
-//         }
-//     }
-//     letterAndIndex = (count,word[i]);
-//     letterIndex.Add(letterAndIndex);
-//     count=0;
-// }
-
-// Console.WriteLine(string.Join(", ", letterIndex));
-
-List<string> letterBlocks = new List<string>{"ET", "RE", "ES", "TR"};
+﻿Console.WriteLine("Welcome to the ABC Kata Game!");
+Console.WriteLine("Type a word to check if it can be spelled using the blocks");
+string word = Console.ReadLine().ToUpper();
 List<string> usedBlocks = new List<string>(); 
-Console.WriteLine(recursiveFunction(word, 0, letterBlocks));
+WordGame wordGame = new WordGame(word, usedBlocks);
+Console.WriteLine(wordGame.CheckIfWordExists(word,0));
 
 
-bool recursiveFunction(string word, int index, List<string> letterBlocks){
-    if (index == word.Length){
+public class WordGame {
+    private string word;
+    private List<string> letterBlockList;
+    private List<string> usedBlocks;
+    public WordGame(string word, List<string> usedBlocks){
+        this.word = word;
+        this.usedBlocks = usedBlocks;
+        letterBlockList = SelectRandomList();
+    }
+    private static List<string> SelectRandomList(){
+        List<string> list1 = new List<string> {"BO","XK","DQ","CP","NA","GT","RE","TG","QD","FS","JW","HU","VI","AN","OB","ER","FS","LY","PC","ZM"};
+        List<string> list2 = new List<string> {"XT", "LW", "RM", "VF", "PK", "JN", "SQ", "DY", "BZ", "CH","UG", "AO", "MT", "EX", "QP", "HC", "ZF", "NK", "WL", "YV"};
+        Random random = new Random();
+        List<string> randomizedList = random.Next(2) == 0 ? list1 : list2;
+        Console.WriteLine("The letter block list is: " + string.Join(", ", randomizedList));
+        return randomizedList;
+    }
+    public bool CheckIfWordExists(string word, int wordIndex){
+    if (wordIndex == word.Length){
         return true;
     }
-
-    char letter = word[index];
-    for (int i = letterBlocks.Count - 1; i >= 0; i--){
-        if (letterBlocks[i].Contains(letter)){
-            usedBlocks.Add(letterBlocks[i]);
-            letterBlocks.RemoveAt(i);
-        if (recursiveFunction(word, index+1, letterBlocks)) return true;
-        letterBlocks.Insert(i,usedBlocks[^1]);
+    char letter = word[wordIndex];
+    for (int i = letterBlockList.Count - 1; i >= 0; i--){
+        if (letterBlockList[i].Contains(letter)){
+            usedBlocks.Add(letterBlockList[i]);
+            letterBlockList.RemoveAt(i);
+        if (CheckIfWordExists(word, wordIndex+1))return true;
+        letterBlockList.Insert(i,usedBlocks[^1]);
         usedBlocks.RemoveAt(usedBlocks.Count-1);
         }
         
     }
     return false;
-
 }
+}
+
+
 

@@ -1,6 +1,6 @@
 ﻿Console.WriteLine("Welcome to the ABC Kata Game!");
 Console.WriteLine("Type a word to check if it can be spelled using the blocks");
-string word = (Console.ReadLine().ToUpper());
+string word = Console.ReadLine().ToUpper();
 WordGame newGame = new WordGame(word);
 newGame.CheckIfWordExists();
 

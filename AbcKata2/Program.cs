@@ -3,11 +3,11 @@ Console.WriteLine("Type a word to check if it can be spelled using the blocks");
 string word = Console.ReadLine().ToUpper();
 List<string> usedBlocks = new List<string>(); 
 WordGame wordGame = new WordGame(word, usedBlocks);
-Console.WriteLine(wordGame.CheckIfWordExists(word,0));
+Console.WriteLine(wordGame.CheckIfWordExists(0));
 
 
 public class WordGame {
-    private string word;
+    private readonly string word;
     private List<string> letterBlockList;
     private List<string> usedBlocks;
     public WordGame(string word, List<string> usedBlocks){
@@ -23,7 +23,7 @@ public class WordGame {
         Console.WriteLine("The letter block list is: " + string.Join(", ", randomizedList));
         return randomizedList;
     }
-    public bool CheckIfWordExists(string word, int wordIndex){
+    public bool CheckIfWordExists(int wordIndex){
     if (wordIndex == word.Length){
         return true;
     }
@@ -32,7 +32,7 @@ public class WordGame {
         if (letterBlockList[i].Contains(letter)){
             usedBlocks.Add(letterBlockList[i]);
             letterBlockList.RemoveAt(i);
-        if (CheckIfWordExists(word, wordIndex+1))return true;
+        if (CheckIfWordExists(wordIndex+1))return true;
         letterBlockList.Insert(i,usedBlocks[^1]);
         usedBlocks.RemoveAt(usedBlocks.Count-1);
         }
